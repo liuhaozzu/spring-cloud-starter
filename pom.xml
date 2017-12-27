@@ -1,0 +1,421 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.liuhaozzu</groupId>
+    <artifactId>spring-cloud</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-cloud</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+    </parent>
+
+    <properties>
+        <!-- Project specific properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!-- JCAT Server Portal Version -->
+        <jcat.server.portal.version>1.2-SNAPSHOT</jcat.server.portal.version>
+
+        <!-- Dependencies -->
+        <testng.version>6.11</testng.version>
+        <commons.lang3.version>3.6</commons.lang3.version>
+        <commons.io.version>2.6</commons.io.version>
+        <guava.version>23.5-jre</guava.version>
+        <zt.zip.version>1.12</zt.zip.version>
+        <bcel.version>6.1</bcel.version>
+        <jcl.core.version>2.8</jcl.core.version>
+        <nitrite.version>2.0.1</nitrite.version>
+        <common.http.client.version>3.1</common.http.client.version>
+        <jcat.annotation.version>0.0.3</jcat.annotation.version>
+        <cacpl.avop.sdk.version>1.1</cacpl.avop.sdk.version>
+
+        <!-- Build plugins -->
+        <maven-java-formatter.version>0.6</maven-java-formatter.version>
+        <jcat-common-code-formatter.version>1.0.2</jcat-common-code-formatter.version>
+        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
+        <maven-jacoco-plugin.version>0.7.4.201502262128</maven-jacoco-plugin.version>
+        <m2e-lifecycle-mapping.version>1.0.0</m2e-lifecycle-mapping.version>
+        <maven-sonar-plugin.version>3.2</maven-sonar-plugin.version>
+    </properties>
+
+    <modules>
+        <module>discovery</module>
+        <module>service0</module>
+        <module>service1</module>
+        <module>gateway</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Custom Dependencies (not in SpringBoot pom.xml) -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>zt-zip</artifactId>
+                <version>${zt.zip.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.bcel</groupId>
+                <artifactId>bcel</artifactId>
+                <version>${bcel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-annotation</artifactId>
+                <version>${jcat.annotation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.xeustechnologies</groupId>
+                <artifactId>jcl-core</artifactId>
+                <version>${jcl.core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.dizitart</groupId>
+                <artifactId>nitrite</artifactId>
+                <version>${nitrite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${common.http.client.version}</version>
+            </dependency>
+
+            <!-- AVOP Model SDK -->
+            <dependency>
+                <groupId>com.ericsson.avop</groupId>
+                <artifactId>cacpl-avop-testhead-sdk</artifactId>
+                <version>${cacpl.avop.sdk.version}</version>
+            </dependency>
+
+            <!-- JCAT Server Portal -->
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-portal</artifactId>
+                <version>${jcat.server.portal.version}</version>
+            </dependency>
+
+            <!-- JCAT Server Modules -->
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-conf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-testcase-executor-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-testcase-executor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-dao-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-dao-mongodb</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-dao-nitrite</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-server-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>se.ericsson.jcat</groupId>
+                <artifactId>jcat-avop-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>${m2e-lifecycle-mapping.version}</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            com.googlecode.maven-java-formatter-plugin
+                                        </groupId>
+                                        <artifactId>
+                                            maven-java-formatter-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [0.4,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>format</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.jacoco</groupId>
+                                        <artifactId>jacoco-maven-plugin</artifactId>
+                                        <versionRange>[0.5,)</versionRange>
+                                        <goals>
+                                            <goal>prepare-agent</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>build-helper-maven-plugin</artifactId>
+                                        <versionRange>[1.9.1,)</versionRange>
+                                        <goals>
+                                            <goal>add-source</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${maven-sonar-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jcat-server-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+                <artifactId>maven-java-formatter-plugin</artifactId>
+                <version>${maven-java-formatter.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configFile>jcat-code-formatter.xml</configFile>
+                    <lineEnding>LF</lineEnding>
+                    <compilerSource>1.8</compilerSource>
+                    <compilerCompliance>1.8</compilerCompliance>
+                    <compilerTargetPlatform>1.8</compilerTargetPlatform>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>se.ericsson.jcat</groupId>
+                        <artifactId>jcat-common-code-formatter</artifactId>
+                        <version>${jcat-common-code-formatter.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${maven-jacoco-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+    <distributionManagement>
+        <repository>
+            <id>jcat-arm-release</id>
+            <name>jcat-arm-release</name>
+            <url>https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-jcat-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>jcat-arm-snapshot</id>
+            <name>jcat-arm-snapshot</name>
+            <url>https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-jcat-dev-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <issueManagement>
+        <system>JCAT Framework Jira</system>
+        <url>https://plf-jira.rnd.ki.sw.ericsson.se/projects/JCAT/summary</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:ssh://gerrit.ericsson.se:29418/jcat/jcat-server</connection>
+        <developerConnection>scm:git:ssh://gerrit.ericsson.se:29418/jcat/jcat-server</developerConnection>
+        <url>scm:git:ssh://gerrit.ericsson.se:29418/jcat/jcat-server</url>
+    </scm>
+
+    <profiles>
+        <profile>
+            <id>disable-java8-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
+    </profiles>
+</project>
